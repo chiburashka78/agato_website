@@ -8,7 +8,7 @@
 
   <style>
     :root {
-      --image: url("assets/images/futuristic_cybersecurity_data_network_shield.png");
+      --image: url("assets/images/background_image.png");
       --bg: #08090b;
       --bg-2: #0d0f13;
       --panel: #11141a;
@@ -103,7 +103,8 @@
       transition: color 160ms ease;
     }
 
-    .nav-links a:hover {
+    .nav-links a:hover,
+    .nav-links a[aria-current="page"] {
       color: var(--text);
     }
 
@@ -281,6 +282,7 @@
     }
 
     .service-card {
+      display: block;
       min-height: 280px;
       padding: 26px;
       border: 1px solid var(--line);
@@ -484,12 +486,14 @@
 <body>
   <header class="site-header">
     <div class="container nav">
-      <a class="brand" href="#" aria-label="Agato home">
+      <a class="brand" href="index.html" aria-label="Agato home">
         <span class="brand-dot"></span>
         <span>Agato</span>
       </a>
 
       <nav class="nav-links" aria-label="Main navigation">
+        <a href="index.html" aria-current="page">Home</a>
+        <a href="about.html">About</a>
         <a href="#services">Services</a>
         <a href="#approach">Approach</a>
         <a href="#outcomes">Outcomes</a>
@@ -520,6 +524,40 @@
             <strong>Exposure-led assessment</strong>
             <p>Reconnaissance, validation, and reporting focused on what can be seen and acted on from the outside.</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="explore">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="section-label">Explore Agato</div>
+            <h2>Navigate the core parts of the platform and service model.</h2>
+          </div>
+          <p>
+            Use these sections to learn what Agato does, how the assessment process works, and why external security intelligence matters for lean IT teams.
+          </p>
+        </div>
+
+        <div class="service-grid">
+          <a class="service-card" href="about.html">
+            <span>PAGE</span>
+            <h3>About Agato</h3>
+            <p>Learn the mission, operating model, and why Agato is designed as a force multiplier for small and mid-sized organizations.</p>
+          </a>
+
+          <a class="service-card" href="#services">
+            <span>SECTION</span>
+            <h3>Services</h3>
+            <p>Review the external security intelligence, network survey, traffic analysis, and disciplined testing capabilities.</p>
+          </a>
+
+          <a class="service-card" href="#approach">
+            <span>SECTION</span>
+            <h3>Approach</h3>
+            <p>See how Agato discovers, analyzes, prioritizes, and reports exposed infrastructure risk.</p>
+          </a>
         </div>
       </div>
     </section>
@@ -639,7 +677,7 @@
             Get a clear view of exposed infrastructure, network security signals, and the risks most worth fixing first.
           </p>
         </div>
-        <a class="button button-primary" href="mailto:contact@agato.com">Request Briefing</a>
+        <a class="button button-primary" href="mailto:contact@agato.ai">Request Briefing</a>
       </div>
     </section>
   </main>
