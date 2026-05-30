@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agato | External Security Intelligence</title>
+  <meta name="description" content="Agato helps organizations understand exposed infrastructure, network signals, and externally visible security risk." />
+
+  <style>
+    :root {
+      --image: url("futuristic_cybersecurity_data_network_shield.png");
+      --bg: #08090b;
+      --bg-2: #0d0f13;
+      --panel: #11141a;
+      --panel-2: #151922;
+      --text: #f4f1ea;
+      --muted: #a9a39a;
+      --soft: #777168;
+      --line: rgba(244, 241, 234, 0.12);
+      --line-2: rgba(244, 241, 234, 0.2);
+      --accent: #c8ad75;
+      --accent-soft: rgba(200, 173, 117, 0.15);
+      --max: 1180px;
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+    }
+
+    body {
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 80% 0%, rgba(200, 173, 117, 0.08), transparent 32%),
+        linear-gradient(180deg, #08090b 0%, #0b0d11 48%, #08090b 100%);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(8, 9, 11, 0.82);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(20px);
+    }
+
+    .nav {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.98rem;
+      font-weight: 750;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .brand-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 22px rgba(200, 173, 117, 0.45);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .nav-links a {
+      transition: color 160ms ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 1px solid var(--line-2);
+      color: var(--text);
+      background: rgba(244, 241, 234, 0.035);
+      font-size: 0.88rem;
+      font-weight: 650;
+      transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      background: rgba(244, 241, 234, 0.075);
+      border-color: rgba(244, 241, 234, 0.35);
+    }
+
+    .button-primary {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+    }
+
+    .button-primary:hover {
+      background: #fff8ed;
+      color: var(--bg);
+    }
+
+    .hero {
+      padding: 104px 0 88px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(360px, 0.78fr);
+      gap: 72px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      color: var(--accent);
+      font-size: 0.86rem;
+      font-weight: 650;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    h1 {
+      max-width: 760px;
+      font-size: clamp(3rem, 6vw, 5.6rem);
+      line-height: 0.98;
+      letter-spacing: -0.065em;
+      font-weight: 760;
+    }
+
+    .hero-copy {
+      max-width: 620px;
+      margin-top: 26px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.72;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .visual-card {
+      position: relative;
+      min-height: 520px;
+      border-radius: calc(var(--radius) + 8px);
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(8, 9, 11, 0.04), rgba(8, 9, 11, 0.86)),
+        var(--image) center / cover no-repeat;
+      border: 1px solid var(--line);
+      box-shadow: 0 32px 100px rgba(0, 0, 0, 0.36);
+      filter: saturate(0.55) contrast(1.04) brightness(0.72);
+    }
+
+    .visual-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(8, 9, 11, 0.5), transparent 45%),
+        radial-gradient(circle at 70% 28%, rgba(200, 173, 117, 0.12), transparent 34%);
+      pointer-events: none;
+    }
+
+    .visual-caption {
+      position: absolute;
+      left: 22px;
+      right: 22px;
+      bottom: 22px;
+      z-index: 2;
+      border-radius: var(--radius);
+      padding: 20px;
+      background: rgba(8, 9, 11, 0.72);
+      border: 1px solid rgba(244, 241, 234, 0.16);
+      backdrop-filter: blur(18px);
+    }
+
+    .visual-caption strong {
+      display: block;
+      font-size: 0.95rem;
+      margin-bottom: 7px;
+    }
+
+    .visual-caption p {
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 0.92rem;
+    }
+
+    .section {
+      padding: 88px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.55fr);
+      gap: 64px;
+      align-items: end;
+      margin-bottom: 40px;
+    }
+
+    .section-label {
+      margin-bottom: 12px;
+      color: var(--accent);
+      font-size: 0.84rem;
+      font-weight: 650;
+    }
+
+    h2 {
+      max-width: 720px;
+      font-size: clamp(2.1rem, 4vw, 4rem);
+      line-height: 1.02;
+      letter-spacing: -0.052em;
+      font-weight: 740;
+    }
+
+    .section-header p,
+    .lead {
+      color: var(--muted);
+      line-height: 1.72;
+      font-size: 1rem;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .service-card {
+      min-height: 280px;
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(244, 241, 234, 0.038), rgba(244, 241, 234, 0.018));
+    }
+
+    .service-card span {
+      display: block;
+      margin-bottom: 44px;
+      color: var(--soft);
+      font-size: 0.82rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    .service-card h3 {
+      margin-bottom: 12px;
+      font-size: 1.35rem;
+      letter-spacing: -0.035em;
+      font-weight: 720;
+    }
+
+    .service-card p {
+      color: var(--muted);
+      line-height: 1.62;
+      font-size: 0.96rem;
+    }
+
+    .split-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.86fr) minmax(360px, 0.64fr);
+      gap: 72px;
+      align-items: start;
+    }
+
+    .split-grid .lead {
+      max-width: 660px;
+      margin-top: 24px;
+      font-size: 1.05rem;
+    }
+
+    .process {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: rgba(244, 241, 234, 0.018);
+    }
+
+    .process-row {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 20px;
+      padding: 22px 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .process-row:last-child {
+      border-bottom: 0;
+    }
+
+    .process-row span {
+      color: var(--accent);
+      font-size: 0.86rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    .process-row h3 {
+      margin-bottom: 5px;
+      font-size: 1.02rem;
+      font-weight: 720;
+    }
+
+    .process-row p {
+      color: var(--muted);
+      line-height: 1.56;
+      font-size: 0.94rem;
+    }
+
+    .outcome-band {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 38px;
+    }
+
+    .outcome {
+      padding: 24px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    .outcome strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 1.08rem;
+    }
+
+    .outcome p {
+      color: var(--muted);
+      line-height: 1.58;
+      font-size: 0.94rem;
+    }
+
+    .cta {
+      padding: 96px 0;
+    }
+
+    .cta-box {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 32px;
+      align-items: center;
+      padding: 38px;
+      border: 1px solid var(--line);
+      border-radius: calc(var(--radius) + 8px);
+      background:
+        linear-gradient(90deg, rgba(8, 9, 11, 0.88), rgba(8, 9, 11, 0.72)),
+        var(--image) right center / cover no-repeat;
+      overflow: hidden;
+    }
+
+    .cta-box h2 {
+      font-size: clamp(2rem, 3.3vw, 3.35rem);
+      margin-bottom: 14px;
+    }
+
+    .cta-box p {
+      max-width: 640px;
+      color: var(--muted);
+      line-height: 1.68;
+    }
+
+    footer {
+      padding: 26px 0;
+      border-top: 1px solid var(--line);
+      color: var(--soft);
+      font-size: 0.84rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .section-header,
+      .split-grid,
+      .cta-box {
+        grid-template-columns: 1fr;
+      }
+
+      .visual-card {
+        min-height: 400px;
+      }
+
+      .service-grid,
+      .outcome-band {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-box {
+        align-items: start;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .container {
+        width: min(var(--max), calc(100% - 32px));
+      }
+
+      .nav-links,
+      .nav .button {
+        display: none;
+      }
+
+      .hero {
+        padding: 72px 0 64px;
+      }
+
+      h1 {
+        font-size: clamp(2.7rem, 13vw, 4.4rem);
+      }
+
+      .section,
+      .cta {
+        padding: 68px 0;
+      }
+
+      .process-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#" aria-label="Agato home">
+        <span class="brand-dot"></span>
+        <span>Agato</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#services">Services</a>
+        <a href="#approach">Approach</a>
+        <a href="#outcomes">Outcomes</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <a class="button button-primary" href="#contact">Request Briefing</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">External Security Intelligence</div>
+          <h1>Understand your exposed risk before it becomes an incident.</h1>
+          <p class="hero-copy">
+            Agato helps organizations identify externally visible systems, analyze network security signals, and prioritize the risks most likely to matter in a real-world attack.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#contact">Request Briefing</a>
+            <a class="button" href="#services">View Services</a>
+          </div>
+        </div>
+
+        <div class="visual-card" aria-label="Agato security intelligence visual">
+          <div class="visual-caption">
+            <strong>Exposure-led assessment</strong>
+            <p>Reconnaissance, validation, and reporting focused on what can be seen and acted on from the outside.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="section-label">Services</div>
+            <h2>Focused security assessments without unnecessary noise.</h2>
+          </div>
+          <p>
+            Agato combines OSINT, network analysis, and disciplined validation to give teams a clearer view of exposure, ownership, and remediation priority.
+          </p>
+        </div>
+
+        <div class="service-grid">
+          <article class="service-card">
+            <span>01</span>
+            <h3>Network Surveys</h3>
+            <p>Map public-facing infrastructure, exposed services, DNS records, certificates, vendors, and externally visible technologies.</p>
+          </article>
+
+          <article class="service-card">
+            <span>02</span>
+            <h3>Traffic Analysis</h3>
+            <p>Review network behavior for beaconing patterns, suspicious surges, abnormal protocols, and operational security indicators.</p>
+          </article>
+
+          <article class="service-card">
+            <span>03</span>
+            <h3>Security Testing</h3>
+            <p>Validate findings with safe, disciplined testing and produce remediation guidance for both leadership and technical teams.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="approach">
+      <div class="container split-grid">
+        <div>
+          <div class="section-label">Approach</div>
+          <h2>Adversary-minded analysis. Business-ready output.</h2>
+          <p class="lead">
+            Agato looks at your organization from the outside in: what is visible, what is reachable, what is ambiguous, and what deserves immediate attention. The result is a concise assessment that helps teams move from discovery to action.
+          </p>
+        </div>
+
+        <div class="process" aria-label="Agato assessment process">
+          <div class="process-row">
+            <span>01</span>
+            <div>
+              <h3>Discover</h3>
+              <p>Identify domains, public assets, services, ownership signals, and exposed technologies.</p>
+            </div>
+          </div>
+          <div class="process-row">
+            <span>02</span>
+            <div>
+              <h3>Analyze</h3>
+              <p>Correlate OSINT, service data, network behavior, and technical evidence.</p>
+            </div>
+          </div>
+          <div class="process-row">
+            <span>03</span>
+            <div>
+              <h3>Prioritize</h3>
+              <p>Rank issues by exposure, exploitability, business impact, and urgency.</p>
+            </div>
+          </div>
+          <div class="process-row">
+            <span>04</span>
+            <div>
+              <h3>Report</h3>
+              <p>Deliver findings, evidence, executive summaries, and recommended fixes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="outcomes">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="section-label">Outcomes</div>
+            <h2>Cleaner visibility for better security decisions.</h2>
+          </div>
+          <p>
+            The goal is not another bloated dashboard. Agato produces practical intelligence that can be reviewed by executives and acted on by technical teams.
+          </p>
+        </div>
+
+        <div class="outcome-band">
+          <div class="outcome">
+            <strong>Reduce unknown exposure</strong>
+            <p>Find forgotten systems, unclear ownership, abandoned services, and internet-facing security debt.</p>
+          </div>
+          <div class="outcome">
+            <strong>Prioritize what matters</strong>
+            <p>Separate meaningful security risk from low-value scanner output and generic alerts.</p>
+          </div>
+          <div class="outcome">
+            <strong>Report with evidence</strong>
+            <p>Provide concise findings supported by technical detail, context, and remediation guidance.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contact">
+      <div class="container cta-box">
+        <div>
+          <div class="section-label">Engage Agato</div>
+          <h2>Start with a focused external assessment.</h2>
+          <p>
+            Get a clear view of exposed infrastructure, network security signals, and the risks most worth fixing first.
+          </p>
+        </div>
+        <a class="button button-primary" href="mailto:contact@agato.com">Request Briefing</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© 2026 Agato</span>
+      <span>External Security Intelligence</span>
+      <span>OSINT · Network Analysis · Security Testing</span>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agato Client Intelligence Portal</title>
+  <style>
+    :root {
+      --bg: #05070d;
+      --surface: #0b0f19;
+      --surface-2: #101725;
+      --surface-3: #121b2c;
+      --line: rgba(255, 255, 255, 0.08);
+      --line-strong: rgba(125, 211, 252, 0.42);
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --muted-2: #64748b;
+      --accent: #7dd3fc;
+      --accent-2: #38bdf8;
+      --accent-soft: rgba(125, 211, 252, 0.08);
+      --success: #86efac;
+      --warning: #facc15;
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --shadow: 0 32px 90px rgba(0, 0, 0, 0.35);
+      --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: var(--font);
+      background:
+        radial-gradient(circle at 28% -18%, rgba(56, 189, 248, 0.14), transparent 34rem),
+        radial-gradient(circle at 85% 10%, rgba(59, 130, 246, 0.08), transparent 28rem),
+        linear-gradient(180deg, #060913 0%, #05070d 42%, #03050a 100%);
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .page-shell {
+      width: min(1380px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 28px 0 56px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-mark {
+      position: relative;
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(125, 211, 252, 0.22);
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(125, 211, 252, 0.16), rgba(125, 211, 252, 0.04));
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      inset: 9px;
+      border: 1px solid rgba(125, 211, 252, 0.36);
+      border-radius: 5px;
+    }
+
+    .brand-title {
+      font-size: 14px;
+      font-weight: 750;
+      letter-spacing: 0.13em;
+    }
+
+    .brand-subtitle {
+      margin-top: 2px;
+      color: var(--muted-2);
+      font-size: 12px;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .system-state {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--muted);
+      padding: 9px 12px;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .state-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--success);
+      box-shadow: 0 0 16px rgba(134, 239, 172, 0.5);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border: 1px solid transparent;
+      border-radius: 13px;
+      padding: 11px 15px;
+      font-size: 13px;
+      font-weight: 750;
+      transition: 160ms ease;
+    }
+
+    .button-primary {
+      background: var(--text);
+      color: #020617;
+    }
+
+    .button-primary:hover {
+      background: #dff7ff;
+      transform: translateY(-1px);
+    }
+
+    .button-secondary {
+      border-color: var(--line);
+      background: rgba(255, 255, 255, 0.035);
+      color: var(--text);
+    }
+
+    .button-secondary:hover {
+      border-color: rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.06);
+      transform: translateY(-1px);
+    }
+
+    .portal-frame {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      background: rgba(11, 15, 25, 0.76);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(22px);
+      animation: rise 500ms ease both;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+      gap: 32px;
+      align-items: end;
+      padding: 40px 42px 34px;
+      border-bottom: 1px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.045), transparent 55%),
+        rgba(255, 255, 255, 0.014);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow-line {
+      width: 26px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.75;
+    }
+
+    h1 {
+      max-width: 780px;
+      margin: 0;
+      color: var(--text);
+      font-size: clamp(34px, 4vw, 58px);
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+    }
+
+    .hero-copy {
+      max-width: 740px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .hero-panel {
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: rgba(2, 6, 23, 0.34);
+      padding: 20px;
+    }
+
+    .hero-panel-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .hero-panel-title {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .hero-panel-value {
+      margin-top: 7px;
+      font-size: 26px;
+      font-weight: 820;
+      letter-spacing: -0.05em;
+    }
+
+    .scan-ring {
+      position: relative;
+      width: 76px;
+      height: 76px;
+      border-radius: 999px;
+      background: conic-gradient(from 90deg, var(--accent), rgba(125, 211, 252, 0.08) 48%, rgba(255,255,255,0.05));
+    }
+
+    .scan-ring::before {
+      content: "";
+      position: absolute;
+      inset: 7px;
+      border-radius: inherit;
+      background: #080d17;
+    }
+
+    .scan-ring::after {
+      content: "";
+      position: absolute;
+      inset: 28px;
+      border-radius: inherit;
+      background: var(--accent);
+      box-shadow: 0 0 24px rgba(125, 211, 252, 0.56);
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .mini-cell {
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: rgba(255, 255, 255, 0.026);
+      padding: 12px;
+    }
+
+    .mini-label {
+      color: var(--muted-2);
+      font-size: 11px;
+    }
+
+    .mini-value {
+      margin-top: 6px;
+      font-size: 15px;
+      font-weight: 780;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 350px;
+      align-items: start;
+    }
+
+    .form-panel {
+      padding: 36px 42px 42px;
+      border-right: 1px solid var(--line);
+    }
+
+    .side-panel {
+      display: grid;
+      gap: 22px;
+      padding: 30px;
+    }
+
+    .form-section {
+      padding: 0 0 34px;
+      margin-bottom: 34px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .form-section:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 38px minmax(0, 1fr);
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .section-index {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(125, 211, 252, 0.18);
+      border-radius: 13px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 780;
+      letter-spacing: -0.01em;
+    }
+
+    .section-desc {
+      max-width: 620px;
+      margin: 5px 0 0;
+      color: var(--muted-2);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .field-wide {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+    }
+
+    .label-text {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--muted-2);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(2, 6, 23, 0.44);
+      color: var(--text);
+      outline: none;
+      padding: 13px 14px;
+      font-size: 14px;
+      transition: 160ms ease;
+    }
+
+    textarea {
+      min-height: 116px;
+      resize: vertical;
+      line-height: 1.55;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #475569;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--line-strong);
+      background: rgba(2, 6, 23, 0.76);
+      box-shadow: 0 0 0 4px rgba(125, 211, 252, 0.055);
+    }
+
+    .segmented {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(2, 6, 23, 0.28);
+      padding: 7px;
+    }
+
+    .segment {
+      border: 0;
+      border-radius: 12px;
+      background: transparent;
+      color: var(--muted-2);
+      padding: 10px 8px;
+      font-size: 12px;
+      font-weight: 750;
+      transition: 160ms ease;
+    }
+
+    .segment:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .segment.active {
+      background: rgba(125, 211, 252, 0.12);
+      color: #dff7ff;
+      box-shadow: inset 0 0 0 1px rgba(125, 211, 252, 0.14);
+    }
+
+    .upload-box {
+      border: 1px dashed rgba(255, 255, 255, 0.16);
+      border-radius: 22px;
+      background: rgba(2, 6, 23, 0.28);
+      padding: 22px;
+      transition: 160ms ease;
+    }
+
+    .upload-box.dragging {
+      border-color: rgba(125, 211, 252, 0.7);
+      background: rgba(125, 211, 252, 0.055);
+    }
+
+    .upload-layout {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .upload-title {
+      font-size: 14px;
+      font-weight: 770;
+    }
+
+    .upload-copy {
+      margin-top: 5px;
+      color: var(--muted-2);
+      font-size: 13px;
+    }
+
+    .file-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .file-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.026);
+      color: var(--muted);
+      padding: 10px 12px;
+      font-size: 12px;
+    }
+
+    .footer-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding-top: 32px;
+    }
+
+    .footer-note {
+      max-width: 620px;
+      color: var(--muted-2);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .panel-block {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(2, 6, 23, 0.26);
+      padding: 20px;
+    }
+
+    .panel-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .panel-title {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 780;
+    }
+
+    .panel-subtitle {
+      margin: 4px 0 0;
+      color: var(--muted-2);
+      font-size: 12px;
+    }
+
+    .status-pill {
+      border: 1px solid rgba(125, 211, 252, 0.18);
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #bae6fd;
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .steps {
+      position: relative;
+      display: grid;
+      gap: 16px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 28px minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+    }
+
+    .step-dot {
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--muted-2);
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .step.complete .step-dot {
+      border-color: rgba(134, 239, 172, 0.32);
+      background: rgba(134, 239, 172, 0.08);
+      color: var(--success);
+    }
+
+    .step.active .step-dot {
+      border-color: rgba(125, 211, 252, 0.42);
+      background: rgba(125, 211, 252, 0.10);
+      color: var(--accent);
+    }
+
+    .step-name {
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 720;
+    }
+
+    .step-meta {
+      margin-top: 3px;
+      color: var(--muted-2);
+      font-size: 12px;
+    }
+
+    .metric-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .metric-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .metric-row:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .metric-row:first-child {
+      padding-top: 0;
+    }
+
+    .metric-label {
+      color: var(--muted-2);
+      font-size: 12px;
+    }
+
+    .metric-value {
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .module-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .module-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .module-state {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #334155;
+    }
+
+    .module-state.ready {
+      background: var(--accent);
+      box-shadow: 0 0 14px rgba(125, 211, 252, 0.52);
+    }
+
+    .note {
+      border-color: rgba(250, 204, 21, 0.16);
+      background: rgba(250, 204, 21, 0.045);
+    }
+
+    .note-title {
+      color: #fde68a;
+      font-size: 13px;
+      font-weight: 780;
+      margin-bottom: 8px;
+    }
+
+    .note-copy {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .toast {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 50;
+      display: none;
+      width: min(360px, calc(100% - 48px));
+      border: 1px solid rgba(125, 211, 252, 0.18);
+      border-radius: 18px;
+      background: rgba(11, 15, 25, 0.96);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.44);
+      padding: 16px;
+      backdrop-filter: blur(18px);
+    }
+
+    .toast.show {
+      display: block;
+      animation: slideIn 260ms ease both;
+    }
+
+    .toast-title {
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .toast-message {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 1160px) {
+      .hero,
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-panel {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .side-panel {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .panel-block:first-child,
+      .note {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 820px) {
+      .page-shell {
+        width: min(100% - 28px, 1380px);
+        padding-top: 18px;
+      }
+
+      .topbar,
+      .top-actions,
+      .footer-actions,
+      .upload-layout {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .system-state,
+      .button {
+        width: 100%;
+      }
+
+      .hero,
+      .form-panel,
+      .side-panel {
+        padding: 24px;
+      }
+
+      .field-grid,
+      .side-panel,
+      .segmented,
+      .mini-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">AG</div>
+        <div>
+          <div class="brand-title">AGATO</div>
+          <div class="brand-subtitle">Client Intelligence Portal</div>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <div class="system-state"><span class="state-dot"></span> Intake environment online</div>
+        <button class="button button-secondary" id="saveDraftBtn" type="button">Save draft</button>
+      </div>
+    </header>
+
+    <section class="portal-frame">
+      <div class="hero">
+        <div>
+          <div class="eyebrow"><span class="eyebrow-line"></span> Secure assessment intake</div>
+          <h1>Scope your external security assessment with precision.</h1>
+          <p class="hero-copy">
+            Submit company, domain, network, and cloud context so AGATO can validate ownership, map exposed infrastructure, and prepare an OSINT-driven risk profile before any active testing begins.
+          </p>
+        </div>
+
+        <aside class="hero-panel" aria-label="Assessment readiness summary">
+          <div class="hero-panel-top">
+            <div>
+              <div class="hero-panel-title">Readiness</div>
+              <div class="hero-panel-value" id="readinessValue">42%</div>
+            </div>
+            <div class="scan-ring" aria-hidden="true"></div>
+          </div>
+          <div class="mini-grid">
+            <div class="mini-cell">
+              <div class="mini-label">Assets</div>
+              <div class="mini-value" id="assetCount">0</div>
+            </div>
+            <div class="mini-cell">
+              <div class="mini-label">Sources</div>
+              <div class="mini-value">8</div>
+            </div>
+            <div class="mini-cell">
+              <div class="mini-label">Status</div>
+              <div class="mini-value" id="draftStatus">Draft</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="content-grid">
+        <form class="form-panel" id="intakeForm">
+          <section class="form-section">
+            <div class="section-head">
+              <div class="section-index">01</div>
+              <div>
+                <h2 class="section-title">Organization</h2>
+                <p class="section-desc">The legal entity, primary contact, and business context for the assessment record.</p>
+              </div>
+            </div>
+
+            <div class="field-grid">
+              <label>
+                <span class="label-text">Company Name</span>
+                <input name="companyName" type="text" placeholder="Meridian Legal Group" required />
+              </label>
+              <label>
+                <span class="label-text">Primary Contact</span>
+                <input name="primaryContact" type="text" placeholder="Jane Smith" />
+              </label>
+              <label>
+                <span class="label-text">Business Email</span>
+                <input name="businessEmail" type="email" placeholder="security@example.com" />
+              </label>
+              <label>
+                <span class="label-text">Industry</span>
+                <input name="industry" type="text" placeholder="Law firm, healthcare, accounting, SaaS" />
+              </label>
+            </div>
+          </section>
+
+          <section class="form-section">
+            <div class="section-head">
+              <div class="section-index">02</div>
+              <div>
+                <h2 class="section-title">Internet footprint</h2>
+                <p class="section-desc">Domains, subsidiaries, and identifiers used to anchor passive discovery and ownership validation.</p>
+              </div>
+            </div>
+
+            <div class="field-grid">
+              <label>
+                <span class="label-text">Primary Domain</span>
+                <input name="primaryDomain" type="text" placeholder="example.com" />
+              </label>
+              <label>
+                <span class="label-text">Additional Domains</span>
+                <input name="additionalDomains" type="text" placeholder="portal.example.com, example.net" />
+              </label>
+              <label>
+                <span class="label-text">Known Subsidiaries</span>
+                <input name="subsidiaries" type="text" placeholder="Brands, acquisitions, related entities" />
+              </label>
+              <label>
+                <span class="label-text">Headquarters</span>
+                <input name="location" type="text" placeholder="City, State / Region" />
+              </label>
+            </div>
+          </section>
+
+          <section class="form-section">
+            <div class="section-head">
+              <div class="section-index">03</div>
+              <div>
+                <h2 class="section-title">Network scope</h2>
+                <p class="section-desc">Known IP ranges, cloud systems, and critical assets approved for assessment scoping.</p>
+              </div>
+            </div>
+
+            <div class="field-grid">
+              <label>
+                <span class="label-text">IP Ranges / CIDRs</span>
+                <textarea name="ipRanges" placeholder="203.0.113.0/24&#10;198.51.100.14"></textarea>
+              </label>
+              <label>
+                <span class="label-text">Cloud / SaaS Assets</span>
+                <textarea name="cloudAssets" placeholder="AWS, Azure, M365, Google Workspace, VPN portals, SSO endpoints"></textarea>
+              </label>
+              <label>
+                <span class="label-text">ASN / Hosting Provider</span>
+                <input name="asn" type="text" placeholder="AS12345, Cloudflare, AWS, DigitalOcean" />
+              </label>
+              <label>
+                <span class="label-text">Critical Systems</span>
+                <input name="criticalSystems" type="text" placeholder="VPN, Citrix, RDP, mail gateways, client portals" />
+              </label>
+            </div>
+          </section>
+
+          <section class="form-section">
+            <div class="section-head">
+              <div class="section-index">04</div>
+              <div>
+                <h2 class="section-title">Assessment profile</h2>
+                <p class="section-desc">Choose the first-pass analysis package and document engagement guardrails.</p>
+              </div>
+            </div>
+
+            <div class="segmented" id="assessmentSegments" aria-label="Assessment type selector">
+              <button type="button" class="segment active">Attack Surface</button>
+              <button type="button" class="segment">Vendor Exposure</button>
+              <button type="button" class="segment">Executive OSINT</button>
+              <button type="button" class="segment">Cloud Footprint</button>
+              <button type="button" class="segment">Compliance</button>
+            </div>
+
+            <input type="hidden" name="assessmentType" id="assessmentType" value="Attack Surface" />
+
+            <div class="field-grid">
+              <label>
+                <span class="label-text">Assessment Goals</span>
+                <textarea name="goals" placeholder="Exposed services, risky vendors, stale infrastructure, weak TLS, possible compliance gaps"></textarea>
+              </label>
+              <label>
+                <span class="label-text">Exclusions / Restrictions</span>
+                <textarea name="exclusions" placeholder="Exclude acquired domains, avoid certain applications, do not assess vendor-owned ranges"></textarea>
+              </label>
+            </div>
+          </section>
+
+          <section class="form-section">
+            <div class="section-head">
+              <div class="section-index">05</div>
+              <div>
+                <h2 class="section-title">Supporting material</h2>
+                <p class="section-desc">Attach scope files, asset exports, diagrams, or policy references.</p>
+              </div>
+            </div>
+
+            <div class="upload-box" id="uploadBox">
+              <div class="upload-layout">
+                <div>
+                  <div class="upload-title">Drop files here or choose from your device</div>
+                  <div class="upload-copy">CSV, TXT, PDF, XLSX, architecture diagrams</div>
+                </div>
+                <input type="file" id="fileInput" multiple hidden />
+                <button class="button button-secondary" type="button" id="selectFilesBtn">Select files</button>
+              </div>
+              <div class="file-list" id="fileList"></div>
+            </div>
+          </section>
+
+          <div class="footer-actions">
+            <div class="footer-note">
+              Submission creates a scoped assessment record. Active scanning is held until authorization and ownership validation are reviewed.
+            </div>
+            <button class="button button-primary" type="submit">Submit intake →</button>
+          </div>
+        </form>
+
+        <aside class="side-panel">
+          <section class="panel-block">
+            <div class="panel-title-row">
+              <div>
+                <h3 class="panel-title">Engagement flow</h3>
+                <p class="panel-subtitle">Current stage: client scoping</p>
+              </div>
+              <span class="status-pill">Pre-scan</span>
+            </div>
+
+            <div class="steps">
+              <div class="step complete">
+                <div class="step-dot">✓</div>
+                <div>
+                  <div class="step-name">Organization profile</div>
+                  <div class="step-meta">Ready for review</div>
+                </div>
+              </div>
+              <div class="step active">
+                <div class="step-dot">2</div>
+                <div>
+                  <div class="step-name">Network scope</div>
+                  <div class="step-meta">Awaiting client detail</div>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-dot">3</div>
+                <div>
+                  <div class="step-name">Ownership validation</div>
+                  <div class="step-meta">Pending submission</div>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-dot">4</div>
+                <div>
+                  <div class="step-name">Assessment launch</div>
+                  <div class="step-meta">Requires approval</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel-block">
+            <div class="panel-title-row">
+              <div>
+                <h3 class="panel-title">Scope summary</h3>
+                <p class="panel-subtitle">Updated as fields are completed</p>
+              </div>
+            </div>
+
+            <div class="metric-list">
+              <div class="metric-row">
+                <span class="metric-label">Assets queued</span>
+                <span class="metric-value" id="assetCountSide">0</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">Data sources</span>
+                <span class="metric-value">8</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">Authorization</span>
+                <span class="metric-value">Pending</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">Risk signals</span>
+                <span class="metric-value">—</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel-block">
+            <div class="panel-title-row">
+              <div>
+                <h3 class="panel-title">Collection modules</h3>
+                <p class="panel-subtitle">Unlocked after scope approval</p>
+              </div>
+            </div>
+
+            <div class="module-list">
+              <div class="module-item"><span>Shodan / Censys</span><span class="module-state ready"></span></div>
+              <div class="module-item"><span>DNS intelligence</span><span class="module-state ready"></span></div>
+              <div class="module-item"><span>TLS review</span><span class="module-state"></span></div>
+              <div class="module-item"><span>Vendor mapping</span><span class="module-state"></span></div>
+              <div class="module-item"><span>Compliance notes</span><span class="module-state"></span></div>
+            </div>
+          </section>
+
+          <section class="panel-block note">
+            <div class="note-title">Authorization boundary</div>
+            <p class="note-copy">
+              Include only assets your organization owns or is authorized to assess. Label subsidiaries, vendors, and shared infrastructure before submission.
+            </p>
+          </section>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast">
+    <div class="toast-title" id="toastTitle">Saved</div>
+    <div class="toast-message" id="toastMessage">Your intake draft has been saved locally for this prototype.</div>
+  </div>
+
+  <script>
+    const segments = document.querySelectorAll(".segment");
+    const assessmentType = document.getElementById("assessmentType");
+    const saveDraftBtn = document.getElementById("saveDraftBtn");
+    const intakeForm = document.getElementById("intakeForm");
+    const toast = document.getElementById("toast");
+    const toastTitle = document.getElementById("toastTitle");
+    const toastMessage = document.getElementById("toastMessage");
+    const selectFilesBtn = document.getElementById("selectFilesBtn");
+    const fileInput = document.getElementById("fileInput");
+    const fileList = document.getElementById("fileList");
+    const uploadBox = document.getElementById("uploadBox");
+    const assetCount = document.getElementById("assetCount");
+    const assetCountSide = document.getElementById("assetCountSide");
+    const readinessValue = document.getElementById("readinessValue");
+    const draftStatus = document.getElementById("draftStatus");
+
+    function showToast(title, message) {
+      toastTitle.textContent = title;
+      toastMessage.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => toast.classList.remove("show"), 3200);
+    }
+
+    function getFormData() {
+      const data = new FormData(intakeForm);
+      return Object.fromEntries(data.entries());
+    }
+
+    function saveDraft() {
+      const data = getFormData();
+      localStorage.setItem("agatoClientIntakeDraft", JSON.stringify(data));
+      draftStatus.textContent = "Saved";
+      showToast("Draft saved", "The current intake was saved locally for this prototype.");
+    }
+
+    function loadDraft() {
+      const raw = localStorage.getItem("agatoClientIntakeDraft");
+      if (!raw) return;
+
+      try {
+        const data = JSON.parse(raw);
+        Object.entries(data).forEach(([key, value]) => {
+          const field = intakeForm.elements[key];
+          if (field) field.value = value;
+        });
+
+        if (data.assessmentType) {
+          segments.forEach((segment) => {
+            segment.classList.toggle("active", segment.textContent.trim() === data.assessmentType);
+          });
+          assessmentType.value = data.assessmentType;
+        }
+      } catch (error) {
+        console.warn("Could not load saved draft", error);
+      }
+    }
+
+    function splitEntries(value) {
+      return value
+        .split(/[,
+]/)
+        .map((item) => item.trim())
+        .filter(Boolean);
+    }
+
+    function updateReadiness() {
+      const fields = [
+        "companyName",
+        "primaryContact",
+        "businessEmail",
+        "industry",
+        "primaryDomain",
+        "additionalDomains",
+        "ipRanges",
+        "cloudAssets",
+        "goals",
+        "exclusions"
+      ];
+
+      const completed = fields.filter((name) => {
+        const field = intakeForm.elements[name];
+        return field && field.value.trim().length > 0;
+      }).length;
+
+      const readiness = Math.max(18, Math.round((completed / fields.length) * 100));
+      readinessValue.textContent = readiness + "%";
+    }
+
+    function estimateAssetCount() {
+      const ipRanges = intakeForm.elements.ipRanges.value.trim();
+      const cloudAssets = intakeForm.elements.cloudAssets.value.trim();
+      const primaryDomain = intakeForm.elements.primaryDomain.value.trim();
+      const additionalDomains = intakeForm.elements.additionalDomains.value.trim();
+
+      let count = 0;
+      if (primaryDomain) count += 1;
+      if (additionalDomains) count += splitEntries(additionalDomains).length;
+      if (ipRanges) count += splitEntries(ipRanges).length;
+      if (cloudAssets) count += splitEntries(cloudAssets).length;
+
+      assetCount.textContent = count;
+      assetCountSide.textContent = count;
+      updateReadiness();
+    }
+
+    segments.forEach((segment) => {
+      segment.addEventListener("click", () => {
+        segments.forEach((item) => item.classList.remove("active"));
+        segment.classList.add("active");
+        assessmentType.value = segment.textContent.trim();
+      });
+    });
+
+    saveDraftBtn.addEventListener("click", saveDraft);
+    intakeForm.addEventListener("input", estimateAssetCount);
+
+    intakeForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = getFormData();
+      console.log("Client intake submission", data);
+      draftStatus.textContent = "Submitted";
+      showToast("Intake submitted", "Prototype logged the intake package to the browser console.");
+    });
+
+    selectFilesBtn.addEventListener("click", () => fileInput.click());
+
+    fileInput.addEventListener("change", () => {
+      renderFiles(fileInput.files);
+    });
+
+    function renderFiles(files) {
+      fileList.innerHTML = "";
+      Array.from(files).forEach((file) => {
+        const row = document.createElement("div");
+        row.className = "file-item";
+        row.innerHTML = `<span>${file.name}</span><span>${Math.ceil(file.size / 1024)} KB</span>`;
+        fileList.appendChild(row);
+      });
+
+      if (files.length > 0) {
+        showToast("Files attached", `${files.length} file(s) staged for this prototype.`);
+      }
+    }
+
+    ["dragenter", "dragover"].forEach((eventName) => {
+      uploadBox.addEventListener(eventName, (event) => {
+        event.preventDefault();
+        uploadBox.classList.add("dragging");
+      });
+    });
+
+    ["dragleave", "drop"].forEach((eventName) => {
+      uploadBox.addEventListener(eventName, (event) => {
+        event.preventDefault();
+        uploadBox.classList.remove("dragging");
+      });
+    });
+
+    uploadBox.addEventListener("drop", (event) => {
+      renderFiles(event.dataTransfer.files);
+    });
+
+    loadDraft();
+    estimateAsset
