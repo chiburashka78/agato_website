@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Agato | External Exposure Monitoring for Lean IT Teams</title>
-  <meta name="description" content="Agato helps small and mid-sized organizations identify public exposure, validate risk, and prioritize remediation before incidents occur." />
+  <title>Agato | Services</title>
+  <meta name="description" content="Agato services include external exposure monitoring, attack surface analysis, network survey reporting, and technical validation." />
 
   <style>
     :root {
@@ -170,15 +170,15 @@
     }
 
     h1 {
-      max-width: 820px;
-      font-size: clamp(3rem, 6vw, 5.5rem);
+      max-width: 760px;
+      font-size: clamp(3rem, 6vw, 5.6rem);
       line-height: 0.98;
       letter-spacing: -0.065em;
       font-weight: 760;
     }
 
     .hero-copy {
-      max-width: 650px;
+      max-width: 620px;
       margin-top: 26px;
       color: var(--muted);
       font-size: 1.08rem;
@@ -261,7 +261,7 @@
     }
 
     h2 {
-      max-width: 760px;
+      max-width: 720px;
       font-size: clamp(2.1rem, 4vw, 4rem);
       line-height: 1.02;
       letter-spacing: -0.052em;
@@ -275,61 +275,6 @@
       font-size: 1rem;
     }
 
-    .statement {
-      display: grid;
-      grid-template-columns: minmax(0, 0.8fr) minmax(360px, 0.7fr);
-      gap: 72px;
-      align-items: start;
-    }
-
-    .statement-copy {
-      display: grid;
-      gap: 20px;
-      color: var(--muted);
-      font-size: 1.03rem;
-      line-height: 1.75;
-    }
-
-    .signal-panel {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background:
-        radial-gradient(circle at 100% 0%, rgba(200, 173, 117, 0.14), transparent 32%),
-        linear-gradient(180deg, rgba(244, 241, 234, 0.038), rgba(244, 241, 234, 0.018));
-      padding: 28px;
-    }
-
-    .signal-panel h3 {
-      margin-bottom: 18px;
-      font-size: 1.25rem;
-      letter-spacing: -0.032em;
-    }
-
-    .signal-list {
-      list-style: none;
-      display: grid;
-      gap: 14px;
-    }
-
-    .signal-list li {
-      display: grid;
-      grid-template-columns: 26px 1fr;
-      gap: 12px;
-      color: var(--muted);
-      line-height: 1.55;
-      font-size: 0.96rem;
-    }
-
-    .signal-list li::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      margin-top: 8px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 16px rgba(200, 173, 117, 0.38);
-    }
-
     .service-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -337,7 +282,8 @@
     }
 
     .service-card {
-      min-height: 282px;
+      display: block;
+      min-height: 280px;
       padding: 26px;
       border: 1px solid var(--line);
       border-radius: var(--radius);
@@ -346,7 +292,7 @@
 
     .service-card span {
       display: block;
-      margin-bottom: 42px;
+      margin-bottom: 44px;
       color: var(--soft);
       font-size: 0.82rem;
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -354,7 +300,7 @@
 
     .service-card h3 {
       margin-bottom: 12px;
-      font-size: 1.28rem;
+      font-size: 1.35rem;
       letter-spacing: -0.035em;
       font-weight: 720;
     }
@@ -373,7 +319,7 @@
     }
 
     .split-grid .lead {
-      max-width: 680px;
+      max-width: 660px;
       margin-top: 24px;
       font-size: 1.05rem;
     }
@@ -465,7 +411,7 @@
     }
 
     .cta-box p {
-      max-width: 650px;
+      max-width: 640px;
       color: var(--muted);
       line-height: 1.68;
     }
@@ -487,7 +433,6 @@
     @media (max-width: 980px) {
       .hero-grid,
       .section-header,
-      .statement,
       .split-grid,
       .cta-box {
         grid-template-columns: 1fr;
@@ -535,67 +480,6 @@
         gap: 8px;
       }
     }
-  
-
-    .finding-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .finding-card {
-      min-height: 300px;
-      padding: 26px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background:
-        radial-gradient(circle at 100% 0%, rgba(200, 173, 117, 0.1), transparent 34%),
-        linear-gradient(180deg, rgba(244, 241, 234, 0.04), rgba(244, 241, 234, 0.015));
-    }
-
-    .risk-pill {
-      display: inline-flex;
-      align-items: center;
-      margin-bottom: 28px;
-      padding: 7px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(200, 173, 117, 0.32);
-      color: var(--accent);
-      background: rgba(200, 173, 117, 0.08);
-      font-size: 0.75rem;
-      font-weight: 720;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .finding-card h3 {
-      margin-bottom: 12px;
-      font-size: 1.22rem;
-      letter-spacing: -0.032em;
-    }
-
-    .finding-card p {
-      color: var(--muted);
-      line-height: 1.6;
-      font-size: 0.94rem;
-    }
-
-    .finding-card .evidence {
-      margin-top: 18px;
-      padding-top: 16px;
-      border-top: 1px solid var(--line);
-      color: var(--soft);
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 0.78rem;
-      line-height: 1.55;
-    }
-
-    @media (max-width: 980px) {
-      .finding-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
   </style>
 </head>
 
@@ -608,11 +492,11 @@
       </a>
 
       <nav class="nav-links" aria-label="Main navigation">
-        <a href="index.html" aria-current="page">Home</a>
-        <a href="#mission">Mission</a>
-        <a href="#capabilities">Capabilities</a>
-        <a href="#findings">Sample Findings</a>
-        <a href="services.html">Services</a>
+        <a href="index.html">Home</a>
+        <a href="index.html#mission">Mission</a>
+        <a href="index.html#capabilities">Capabilities</a>
+        <a href="index.html#findings">Sample Findings</a>
+        <a href="services.html" aria-current="page">Services</a>
         <a href="#contact">Contact</a>
       </nav>
 
@@ -621,169 +505,134 @@
   </header>
 
   <main>
-    <section class="hero" id="home">
+    <section class="hero">
       <div class="container hero-grid">
         <div>
-          <div class="eyebrow">External Exposure Monitoring</div>
-          <h1>Enterprise-grade security capability for lean IT teams.</h1>
+          <div class="eyebrow">External Security Intelligence</div>
+          <h1>Understand your exposed risk before it becomes an incident.</h1>
           <p class="hero-copy">
-            Agato helps small and mid-sized organizations see what attackers can see: exposed infrastructure, risky services, shadow IT, weak security posture, and the findings most worth fixing first.
+            Agato helps organizations identify externally visible systems, analyze network security signals, and prioritize the risks most likely to matter in a real-world attack.
           </p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#contact">Request a Free Exposure Snapshot</a>
-            <a class="button" href="#findings">View Sample Findings</a>
+            <a class="button button-primary" href="#contact">Request Exposure Snapshot</a>
+            <a class="button" href="#services">View Service Areas</a>
           </div>
         </div>
 
-        <div class="visual-card" aria-label="Agato external exposure monitoring visual">
+        <div class="visual-card" aria-label="Agato security intelligence visual">
           <div class="visual-caption">
-            <strong>Built as a force multiplier</strong>
-            <p>Continuous monitoring, OSINT enrichment, technical validation, and plain-English reporting for teams that do not have time to chase scanner noise.</p>
+            <strong>Exposure-led assessment</strong>
+            <p>Reconnaissance, validation, and reporting focused on what can be seen and acted on from the outside.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="mission">
-      <div class="container statement">
-        <div>
-          <div class="section-label">What is Agato?</div>
-          <h2>We help organizations reduce exposed risk before it becomes an incident.</h2>
-        </div>
-
-        <div class="statement-copy">
-          <p>Agato is building a scalable cybersecurity platform for organizations that need serious security visibility without enterprise-sized security teams. The focus is practical: attack surface reduction, infrastructure hardening, continuous monitoring, and proactive defense measures that help companies identify and remediate internet-facing risk early.</p>
-          <p>Many small and mid-sized businesses rely on one-to-three person IT teams responsible for infrastructure, security, compliance, vendors, and business continuity at the same time. Agato gives those teams an outside-in view of their environment, separates meaningful exposure from noise, and turns technical findings into prioritized action.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="capabilities">
+    <section class="section" id="explore">
       <div class="container">
         <div class="section-header">
           <div>
-            <div class="section-label">Capabilities</div>
-            <h2>Modern security functions without fragmented tool sprawl.</h2>
+            <div class="section-label">Explore Agato</div>
+            <h2>Navigate the core parts of the platform and service model.</h2>
           </div>
           <p>
-            Agato combines OSINT, network analysis, automation, AI-assisted review, and disciplined validation to show clients what is exposed, why it matters, and what to fix first.
+            Use these sections to learn what Agato does, how the assessment process works, and why external security intelligence matters for lean IT teams.
+          </p>
+        </div>
+
+        <div class="service-grid">
+          <a class="service-card" href="index.html#mission">
+            <span>PAGE</span>
+            <h3>Mission</h3>
+            <p>Learn why Agato is designed as a force multiplier for small and mid-sized organizations.</p>
+          </a>
+
+          <a class="service-card" href="#services">
+            <span>SECTION</span>
+            <h3>Services</h3>
+            <p>Review the external security intelligence, network survey, traffic analysis, and disciplined testing capabilities.</p>
+          </a>
+
+          <a class="service-card" href="#approach">
+            <span>SECTION</span>
+            <h3>Approach</h3>
+            <p>See how Agato discovers, analyzes, prioritizes, and reports exposed infrastructure risk.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="section-label">Services</div>
+            <h2>Focused security assessments without unnecessary noise.</h2>
+          </div>
+          <p>
+            Agato combines OSINT, network analysis, and disciplined validation to give teams a clearer view of exposure, ownership, and remediation priority.
           </p>
         </div>
 
         <div class="service-grid">
           <article class="service-card">
             <span>01</span>
-            <h3>Attack Surface Analysis</h3>
-            <p>Identify exposed domains, IPs, services, DNS records, certificates, vendors, and technologies that shape real-world external risk.</p>
+            <h3>Network Surveys</h3>
+            <p>Map public-facing infrastructure, exposed services, DNS records, certificates, vendors, and externally visible technologies.</p>
           </article>
 
           <article class="service-card">
             <span>02</span>
-            <h3>Shadow IT Discovery</h3>
-            <p>Surface forgotten infrastructure, ambiguous ownership, unmanaged assets, and externally reachable systems that internal teams may not track.</p>
+            <h3>Traffic Analysis</h3>
+            <p>Review network behavior for beaconing patterns, suspicious surges, abnormal protocols, and operational security indicators.</p>
           </article>
 
           <article class="service-card">
             <span>03</span>
-            <h3>Threat Context</h3>
-            <p>Enrich findings with OSINT, known vulnerability context, malware campaign awareness, and attacker-relevant infrastructure intelligence.</p>
-          </article>
-
-          <article class="service-card">
-            <span>04</span>
-            <h3>Infrastructure Hardening</h3>
-            <p>Translate public exposure into practical remediation steps that reduce attack paths and improve the organization’s baseline posture.</p>
-          </article>
-
-          <article class="service-card">
-            <span>05</span>
-            <h3>Safe Validation</h3>
-            <p>Use disciplined checks and controlled testing methods to distinguish meaningful findings from generic scanner output.</p>
-          </article>
-
-          <article class="service-card">
-            <span>06</span>
-            <h3>Network Traffic Analysis</h3>
-            <p>Apply traditional analytics and tailored models to identify suspicious patterns, anomalous behavior, and operational security signals.</p>
+            <h3>Security Testing</h3>
+            <p>Validate findings with safe, disciplined testing and produce remediation guidance for both leadership and technical teams.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section" id="findings">
-      <div class="container">
-        <div class="section-header">
-          <div>
-            <div class="section-label">Sample Findings</div>
-            <h2>Agato turns public exposure into a fix list.</h2>
-          </div>
-          <p>
-            The goal is not to overwhelm teams with raw scanner output. Agato packages findings with evidence, risk context, and remediation guidance.
-          </p>
-        </div>
-
-        <div class="finding-grid">
-          <article class="finding-card">
-            <span class="risk-pill">High Priority</span>
-            <h3>Exposed administrative service</h3>
-            <p>A management interface or sensitive service appears publicly reachable and should be validated for business need, access controls, and patch posture.</p>
-            <p class="evidence">Evidence: public service observed · remediation: restrict by VPN, firewall, or allowlist</p>
-          </article>
-
-          <article class="finding-card">
-            <span class="risk-pill">Medium Priority</span>
-            <h3>Weak email authentication posture</h3>
-            <p>DNS records indicate the domain may not fully enforce anti-spoofing controls, increasing exposure to impersonation and phishing risk.</p>
-            <p class="evidence">Evidence: SPF / DKIM / DMARC review · remediation: move toward enforced policy</p>
-          </article>
-
-          <article class="finding-card">
-            <span class="risk-pill">Needs Validation</span>
-            <h3>Ambiguous vendor-hosted asset</h3>
-            <p>An exposed service appears tied to a provider or vendor environment and should be reviewed before attributing ownership or remediation responsibility.</p>
-            <p class="evidence">Evidence: ASN, org, cert, DNS mismatch · remediation: confirm ownership and business purpose</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="model">
+    <section class="section" id="approach">
       <div class="container split-grid">
         <div>
-          <div class="section-label">Operating Model</div>
-          <h2>Centralized intelligence, technical validation, and timely alerting.</h2>
+          <div class="section-label">Approach</div>
+          <h2>Adversary-minded analysis. Business-ready output.</h2>
           <p class="lead">
-            Agato is intended to be a force multiplier for lean IT and security teams. Instead of forcing clients to manually collect data from fragmented tools, interpret threat intelligence, and continuously monitor public infrastructure on their own, Agato provides one centralized capability for situational awareness, validation, reporting, and alerting.
+            Agato looks at your organization from the outside in: what is visible, what is reachable, what is ambiguous, and what deserves immediate attention. The result is a concise assessment that helps teams move from discovery to action.
           </p>
         </div>
 
-        <div class="process" aria-label="Agato operating model">
+        <div class="process" aria-label="Agato assessment process">
           <div class="process-row">
             <span>01</span>
             <div>
               <h3>Discover</h3>
-              <p>Continuously identify exposed infrastructure, internet-facing services, vendor signals, and ownership indicators.</p>
+              <p>Identify domains, public assets, services, ownership signals, and exposed technologies.</p>
             </div>
           </div>
           <div class="process-row">
             <span>02</span>
             <div>
-              <h3>Enrich</h3>
-              <p>Correlate OSINT, vulnerability context, technical evidence, historical context, and attacker-relevant infrastructure data.</p>
+              <h3>Analyze</h3>
+              <p>Correlate OSINT, service data, network behavior, and technical evidence.</p>
             </div>
           </div>
           <div class="process-row">
             <span>03</span>
             <div>
-              <h3>Validate</h3>
-              <p>Use disciplined testing and adversary-minded analysis to confirm what is exposed, reachable, and worth prioritizing.</p>
+              <h3>Prioritize</h3>
+              <p>Rank issues by exposure, exploitability, business impact, and urgency.</p>
             </div>
           </div>
           <div class="process-row">
             <span>04</span>
             <div>
               <h3>Report</h3>
-              <p>Deliver concise executive summaries, technical findings, evidence, and remediation guidance.</p>
+              <p>Deliver findings, evidence, executive summaries, and recommended fixes.</p>
             </div>
           </div>
         </div>
@@ -794,26 +643,26 @@
       <div class="container">
         <div class="section-header">
           <div>
-            <div class="section-label">Why It Matters</div>
-            <h2>Security clarity for organizations without unlimited headcount.</h2>
+            <div class="section-label">Outcomes</div>
+            <h2>Cleaner visibility for better security decisions.</h2>
           </div>
           <p>
-            Agato is designed for companies where a small IT team is responsible for infrastructure, security operations, continuity, compliance expectations, and leadership communication at the same time.
+            The goal is not another bloated dashboard. Agato produces practical intelligence that can be reviewed by executives and acted on by technical teams.
           </p>
         </div>
 
         <div class="outcome-band">
           <div class="outcome">
             <strong>Reduce unknown exposure</strong>
-            <p>Find forgotten systems, unclear ownership, open services, and infrastructure security debt before attackers do.</p>
+            <p>Find forgotten systems, unclear ownership, abandoned services, and internet-facing security debt.</p>
           </div>
           <div class="outcome">
-            <strong>Act before incidents</strong>
-            <p>Move from reactive alert chasing to proactive monitoring, hardening, validation, and risk prioritization.</p>
+            <strong>Prioritize what matters</strong>
+            <p>Separate meaningful security risk from low-value scanner output and generic alerts.</p>
           </div>
           <div class="outcome">
-            <strong>Communicate with evidence</strong>
-            <p>Give technical teams and executives concise findings supported by context, validation, and remediation guidance.</p>
+            <strong>Report with evidence</strong>
+            <p>Provide concise findings supported by technical detail, context, and remediation guidance.</p>
           </div>
         </div>
       </div>
@@ -823,12 +672,12 @@
       <div class="container cta-box">
         <div>
           <div class="section-label">Engage Agato</div>
-          <h2>Start with a focused external exposure snapshot.</h2>
+          <h2>Start with a focused external assessment.</h2>
           <p>
-            Send Agato a domain and receive a clear view of exposed infrastructure, security signals, and the risks most worth fixing first.
+            Get a clear view of exposed infrastructure, network security signals, and the risks most worth fixing first.
           </p>
         </div>
-        <a class="button button-primary" href="mailto:contact@agato.ai">Request Snapshot</a>
+        <a class="button button-primary" href="mailto:contact@agato.ai">Request Exposure Snapshot</a>
       </div>
     </section>
   </main>
@@ -836,8 +685,8 @@
   <footer>
     <div class="container footer-inner">
       <span>© 2026 Agato</span>
-      <span>External Exposure Monitoring</span>
-      <span>Attack Surface Reduction · Infrastructure Hardening · Continuous Monitoring</span>
+      <span>External Security Intelligence</span>
+      <span>OSINT · Network Analysis · Security Testing</span>
     </div>
   </footer>
 </body>
