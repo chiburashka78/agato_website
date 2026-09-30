@@ -1,0 +1,112 @@
+<!doctype html>
+
+<!--
+    index.html
+
+    Root HTML document for the Agato React application.
+
+    Purpose:
+    --------
+    This file provides the initial HTML shell loaded by the browser.
+
+    React does not replace this file. Instead, React mounts the
+    application inside:
+
+        <div id="root"></div>
+
+    The application startup flow is:
+
+        index.html
+            ↓
+        /src/main.jsx
+            ↓
+        React
+            ↓
+        App.jsx
+            ↓
+        Agato website
+
+    Vite uses this file as the HTML entry point during both
+    development and production builds.
+-->
+
+<html lang="en">
+
+    <head>
+
+        <!-- Character encoding -->
+        <meta charset="UTF-8" />
+
+
+        <!--
+            Responsive viewport configuration.
+
+            Ensures the website uses the actual width of the device
+            rather than rendering as a desktop-sized page on mobile.
+        -->
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+
+
+        <!--
+            Browser interface color.
+
+            Supporting browsers may use this color for portions of
+            the browser UI when displaying the Agato website.
+        -->
+        <meta
+            name="theme-color"
+            content="#08090b"
+        />
+
+
+        <!--
+            Search engine description.
+
+            Provides a concise description of Agato for search engines
+            and other systems that inspect page metadata.
+        -->
+        <meta
+            name="description"
+            content="Agato helps lean IT and security teams discover, validate, and remediate internet-facing security exposure."
+        />
+
+
+        <!-- Page title displayed in the browser tab -->
+        <title>
+            Agato | External Exposure Intelligence
+        </title>
+
+    </head>
+
+
+    <body>
+
+        <!--
+            React application mount point.
+
+            main.jsx locates this element using:
+
+                document.getElementById("root")
+
+            React then renders the entire Agato application inside it.
+        -->
+        <div id="root"></div>
+
+
+        <!--
+            React application entry point.
+
+            Vite processes this module and its dependency tree,
+            including React, React Router, App.jsx, and global.css.
+        -->
+        <script
+            type="module"
+            src="/src/main.jsx"
+        ></script>
+
+    </body>
+
+</html>

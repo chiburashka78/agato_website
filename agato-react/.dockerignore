@@ -1,0 +1,24 @@
+# Dependencies
+node_modules
+
+# Vite production output
+dist
+
+# Git
+.git
+.gitignore
+
+# Docker Compose overrides
+docker-compose.override.yml
+
+# Logs
+*.log
+npm-debug.log*
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# IDE/editor configuration
+.vscode
+.idea

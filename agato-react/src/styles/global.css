@@ -1,0 +1,1495 @@
+/* ==========================================================================
+   AGATO SECURITY SOLUTIONS
+   Global Stylesheet
+   ==========================================================================
+
+   This stylesheet contains the global visual system for the Agato website.
+
+   Organization:
+   -------------
+   01. Design Tokens
+   02. Global Reset
+   03. Base Document Styles
+   04. Typography
+   05. Layout Utilities
+   06. Navigation
+   07. Buttons
+   08. Hero Sections
+   09. Home Hero Visualization
+   10. Content Sections
+   11. Cards
+   12. Split Content
+   13. CTA
+   14. Footer
+   15. Signup / Onboarding Form
+   16. Responsive Styles
+
+   The goal is to keep page components focused on structure and content while
+   this file controls the site's shared presentation.
+*/
+
+
+/* ==========================================================================
+   01. DESIGN TOKENS
+   ==========================================================================
+
+   Shared colors, dimensions, and design values.
+
+   Components should use these variables whenever possible instead of
+   introducing arbitrary values.
+*/
+
+:root {
+    /* Backgrounds */
+    --bg: #08090b;
+    --bg-secondary: #0d1015;
+
+    /* Panels */
+    --panel: #11151b;
+    --panel-secondary: #151a22;
+
+    /* Typography */
+    --text: #f4f1ea;
+    --muted: #aaa59c;
+    --soft: #777168;
+
+    /* Borders */
+    --line: rgba(244, 241, 234, 0.12);
+    --line-strong: rgba(244, 241, 234, 0.22);
+
+    /* Agato accent */
+    --accent: #c8ad75;
+    --accent-soft: rgba(200, 173, 117, 0.12);
+    --accent-border: rgba(200, 173, 117, 0.35);
+
+    /* Layout */
+    --max-width: 1180px;
+
+    /* Border radii */
+    --radius-small: 10px;
+    --radius: 18px;
+    --radius-large: 24px;
+
+    /* Transitions */
+    --transition-fast: 160ms ease;
+}
+
+
+/* ==========================================================================
+   02. GLOBAL RESET
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+html {
+    scroll-behavior: smooth;
+    background: var(--bg);
+}
+
+
+body {
+    min-height: 100vh;
+}
+
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+
+button {
+    cursor: pointer;
+}
+
+
+img,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* ==========================================================================
+   03. BASE DOCUMENT STYLES
+   ========================================================================== */
+
+body {
+    color: var(--text);
+
+    background:
+        radial-gradient(
+            circle at 80% 0%,
+            rgba(200, 173, 117, 0.08),
+            transparent 30%
+        ),
+        linear-gradient(
+            180deg,
+            #08090b,
+            #0b0d11 48%,
+            #08090b
+        );
+
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+
+/* ==========================================================================
+   04. TYPOGRAPHY
+   ========================================================================== */
+
+h1,
+h2,
+h3 {
+    color: var(--text);
+}
+
+
+h1 {
+    font-size: clamp(3.1rem, 6vw, 5.8rem);
+    font-weight: 760;
+    line-height: 0.96;
+    letter-spacing: -0.065em;
+}
+
+
+h2 {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+}
+
+
+h3 {
+    font-size: 1.08rem;
+    letter-spacing: -0.02em;
+}
+
+
+/*
+ * Small gold section label used throughout the site.
+ */
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-bottom: 22px;
+
+    color: var(--accent);
+
+    font-size: 0.78rem;
+    font-weight: 750;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+
+.eyebrow::before {
+    content: "";
+
+    width: 25px;
+    height: 1px;
+
+    background: var(--accent);
+}
+
+
+/*
+ * Larger supporting copy used beneath hero headlines.
+ */
+.hero-copy {
+    max-width: 690px;
+
+    margin-top: 27px;
+
+    color: var(--muted);
+
+    font-size: 1.08rem;
+    line-height: 1.75;
+}
+
+
+/* ==========================================================================
+   05. LAYOUT UTILITIES
+   ========================================================================== */
+
+/*
+ * Primary centered content container.
+ */
+.container {
+    width: min(
+        var(--max-width),
+        calc(100% - 48px)
+    );
+
+    margin-inline: auto;
+}
+
+
+/*
+ * Narrower content treatment used by page hero sections.
+ */
+.narrow {
+    max-width: 900px;
+
+    margin-left: max(
+        24px,
+        calc((100vw - var(--max-width)) / 2)
+    );
+}
+
+
+/* ==========================================================================
+   06. NAVIGATION
+   ========================================================================== */
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+
+    background: rgba(8, 9, 11, 0.82);
+
+    border-bottom: 1px solid var(--line);
+
+    backdrop-filter: blur(20px);
+}
+
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    height: 72px;
+
+    gap: 30px;
+}
+
+
+/* ---------- Brand ---------- */
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 10px;
+
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+
+.brand-mark {
+    display: grid;
+    place-items: center;
+
+    width: 30px;
+    height: 30px;
+
+    color: var(--accent);
+
+    border: 1px solid rgba(200, 173, 117, 0.5);
+    border-radius: 50%;
+
+    font-family: Georgia, serif;
+    font-size: 0.9rem;
+}
+
+
+/* ---------- Navigation Links ---------- */
+
+.nav-links {
+    display: flex;
+
+    gap: 30px;
+
+    color: var(--muted);
+
+    font-size: 0.88rem;
+}
+
+
+.nav-links a {
+    transition: color var(--transition-fast);
+}
+
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--text);
+}
+
+
+/* ==========================================================================
+   07. BUTTONS
+   ========================================================================== */
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 44px;
+
+    padding-inline: 19px;
+
+    gap: 9px;
+
+    color: var(--text);
+    background: rgba(244, 241, 234, 0.035);
+
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+
+    font-size: 0.88rem;
+    font-weight: 700;
+
+    transition:
+        transform var(--transition-fast),
+        background var(--transition-fast),
+        border-color var(--transition-fast);
+}
+
+
+.button:hover {
+    transform: translateY(-1px);
+
+    background: rgba(244, 241, 234, 0.08);
+}
+
+
+.button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+
+/*
+ * Primary light CTA button.
+ */
+.button-primary {
+    color: var(--bg);
+    background: var(--text);
+
+    border-color: var(--text);
+}
+
+
+.button-primary:hover {
+    background: #fff8ed;
+}
+
+
+/* ==========================================================================
+   08. HERO SECTIONS
+   ========================================================================== */
+
+/*
+ * Main homepage hero.
+ */
+.hero {
+    padding: 105px 0 92px;
+
+    border-bottom: 1px solid var(--line);
+}
+
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.08fr 0.82fr;
+    align-items: center;
+
+    gap: 70px;
+}
+
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    margin-top: 32px;
+}
+
+
+/*
+ * Small value propositions underneath the hero buttons.
+ */
+.trust-row {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 18px;
+
+    margin-top: 34px;
+
+    color: var(--soft);
+
+    font-size: 0.76rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+
+.trust-row span + span::before {
+    content: "•";
+
+    margin-right: 18px;
+
+    color: var(--accent);
+}
+
+
+/*
+ * Generic hero used on Services, About, Signup, and 404 pages.
+ */
+.page-hero {
+    padding: 120px 0 105px;
+
+    border-bottom: 1px solid var(--line);
+}
+
+
+.page-hero .button {
+    margin-top: 28px;
+}
+
+
+/* ==========================================================================
+   09. HOME HERO VISUALIZATION
+   ========================================================================== */
+
+.visual-card {
+    display: flex;
+    align-items: flex-end;
+
+    min-height: 520px;
+
+    padding: 22px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(8, 9, 11, 0.12),
+            rgba(8, 9, 11, 0.88)
+        ),
+        url("/images/background_image.png") center / cover;
+
+    border: 1px solid var(--line);
+    border-radius: 26px;
+
+    box-shadow:
+        0 32px 100px rgba(0, 0, 0, 0.38);
+}
+
+
+.scan-ui {
+    width: 100%;
+
+    padding: 20px;
+
+    background: rgba(8, 9, 11, 0.78);
+
+    border: 1px solid rgba(244, 241, 234, 0.15);
+    border-radius: 16px;
+
+    backdrop-filter: blur(18px);
+}
+
+
+.scan-top,
+.signal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.scan-top {
+    padding-bottom: 14px;
+
+    color: var(--soft);
+
+    border-bottom: 1px solid var(--line);
+
+    font-size: 0.67rem;
+    letter-spacing: 0.1em;
+}
+
+
+.live {
+    color: var(--accent);
+}
+
+
+.live i {
+    display: inline-block;
+
+    width: 6px;
+    height: 6px;
+
+    margin-right: 5px;
+
+    background: var(--accent);
+
+    border-radius: 50%;
+}
+
+
+.metric {
+    padding: 20px 0;
+}
+
+
+.metric small {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: var(--soft);
+
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+}
+
+
+.metric strong {
+    font-size: 1.1rem;
+}
+
+
+.signal {
+    padding: 11px 0;
+
+    color: var(--muted);
+
+    border-top: 1px solid var(--line);
+
+    font-size: 0.78rem;
+}
+
+
+.signal b {
+    color: var(--text);
+
+    font-weight: 600;
+}
+
+
+/* ==========================================================================
+   10. CONTENT SECTIONS
+   ========================================================================== */
+
+.section {
+    padding: 100px 0;
+
+    border-bottom: 1px solid var(--line);
+}
+
+
+.section-alt {
+    background: rgba(255, 255, 255, 0.015);
+}
+
+
+.section-head {
+    max-width: 760px;
+
+    margin-bottom: 48px;
+}
+
+
+.section-head p {
+    margin-top: 18px;
+
+    color: var(--muted);
+
+    line-height: 1.7;
+}
+
+
+/* ==========================================================================
+   11. CARDS
+   ========================================================================== */
+
+.card-grid,
+.three-grid,
+.process-grid {
+    display: grid;
+
+    gap: 14px;
+}
+
+
+.card-grid,
+.three-grid {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+
+.process-grid {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+
+.card {
+    min-height: 225px;
+
+    padding: 26px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.035),
+            rgba(255, 255, 255, 0.012)
+        );
+
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease;
+}
+
+
+.card:hover {
+    transform: translateY(-3px);
+
+    border-color: var(--accent-border);
+}
+
+
+.card-number {
+    display: block;
+
+    margin-bottom: 48px;
+
+    color: var(--accent);
+
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+}
+
+
+.card h3 {
+    margin-bottom: 12px;
+}
+
+
+.card p {
+    color: var(--muted);
+
+    font-size: 0.91rem;
+    line-height: 1.65;
+}
+
+
+/* ==========================================================================
+   12. SPLIT CONTENT
+   ========================================================================== */
+
+.split {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+
+    gap: 90px;
+}
+
+
+.stack {
+    display: grid;
+}
+
+
+.stack p {
+    padding: 22px 0;
+
+    color: var(--muted);
+
+    border-top: 1px solid var(--line);
+
+    line-height: 1.75;
+}
+
+
+.stack p:last-child {
+    border-bottom: 1px solid var(--line);
+}
+
+
+/* ==========================================================================
+   13. CALL TO ACTION
+   ========================================================================== */
+
+.cta-section {
+    padding: 90px 0;
+}
+
+
+.cta {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 60px;
+
+    padding: 48px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(200, 173, 117, 0.09),
+            rgba(255, 255, 255, 0.02)
+        );
+
+    border: 1px solid rgba(200, 173, 117, 0.3);
+    border-radius: var(--radius-large);
+}
+
+
+.cta h2 {
+    max-width: 700px;
+}
+
+
+.cta p {
+    max-width: 700px;
+
+    margin-top: 18px;
+
+    color: var(--muted);
+
+    line-height: 1.7;
+}
+
+
+/* ==========================================================================
+   14. FOOTER
+   ========================================================================== */
+
+footer {
+    padding: 42px 0 50px;
+
+    border-top: 1px solid var(--line);
+}
+
+
+.footer-inner {
+    display: flex;
+    justify-content: space-between;
+
+    gap: 40px;
+
+    color: var(--muted);
+
+    font-size: 0.84rem;
+}
+
+
+.footer-inner p {
+    margin-top: 14px;
+}
+
+
+.footer-links {
+    display: flex;
+    align-items: center;
+
+    gap: 24px;
+}
+
+
+.footer-links a {
+    transition: color var(--transition-fast);
+}
+
+
+.footer-links a:hover {
+    color: var(--text);
+}
+
+
+/* ==========================================================================
+   15. SIGNUP / CUSTOMER ONBOARDING
+   ==========================================================================
+
+   The signup page is intentionally more constrained than standard content
+   pages. Long forms are easier to read when they do not span the entire
+   viewport.
+
+   Structure:
+
+       Signup Hero
+           ↓
+       Signup Container
+           ↓
+       Signup Card
+           ↓
+       Form Sections
+           ↓
+       Payment / Submit
+*/
+
+
+/* ---------- Signup Page ---------- */
+
+.signup-hero {
+    padding-bottom: 72px;
+}
+
+
+.signup-container {
+    max-width: 980px;
+}
+
+
+/*
+ * Main form surface.
+ *
+ * This creates the "template/card" appearance around the onboarding flow.
+ */
+.signup-form {
+    padding: 48px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.045),
+            rgba(255, 255, 255, 0.018)
+        );
+
+    border: 1px solid var(--line);
+    border-radius: var(--radius-large);
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+
+/* ---------- Form Sections ---------- */
+
+.form-section {
+    margin: 0;
+    padding: 0 0 40px;
+
+    border: 0;
+}
+
+
+.form-section + .form-section {
+    padding-top: 40px;
+
+    border-top: 1px solid var(--line);
+}
+
+
+.form-section legend {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+
+    margin-bottom: 24px;
+
+    gap: 12px;
+
+    color: var(--text);
+
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+
+.form-step {
+    color: var(--accent);
+
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+}
+
+
+.form-help {
+    margin: -12px 0 24px;
+
+    color: var(--soft);
+
+    font-size: 0.88rem;
+    line-height: 1.5;
+}
+
+
+/* ---------- Form Grid ---------- */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+
+    gap: 9px;
+}
+
+
+.form-field > span {
+    color: var(--muted);
+
+    font-size: 0.86rem;
+    font-weight: 600;
+}
+
+
+/* ---------- Inputs ---------- */
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+    width: 100%;
+    min-height: 52px;
+
+    padding: 13px 15px;
+
+    color: var(--text);
+    background: rgba(0, 0, 0, 0.24);
+
+    border: 1px solid var(--line);
+    border-radius: var(--radius-small);
+
+    outline: none;
+
+    transition:
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast);
+}
+
+
+.form-field textarea {
+    min-height: 130px;
+
+    resize: vertical;
+}
+
+
+.form-field input:hover,
+.form-field select:hover,
+.form-field textarea:hover {
+    border-color: var(--line-strong);
+}
+
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+    background: rgba(0, 0, 0, 0.38);
+
+    border-color: rgba(200, 173, 117, 0.72);
+
+    box-shadow:
+        0 0 0 3px rgba(200, 173, 117, 0.1);
+}
+
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+    color: var(--soft);
+}
+
+
+.form-field select {
+    cursor: pointer;
+}
+
+
+.form-field select option {
+    color: var(--text);
+    background: var(--panel);
+}
+
+
+/* ---------- Checkboxes ---------- */
+
+.checkbox-field {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 11px;
+
+    color: var(--muted);
+
+    font-size: 0.9rem;
+    line-height: 1.5;
+
+    cursor: pointer;
+}
+
+
+.checkbox-field input {
+    flex: 0 0 auto;
+
+    width: 17px;
+    height: 17px;
+
+    margin-top: 2px;
+
+    accent-color: var(--accent);
+
+    cursor: pointer;
+}
+
+
+.form-section .checkbox-field + .form-grid {
+    margin-top: 24px;
+}
+
+
+/* ---------- Company Size Selector ---------- */
+
+.size-options {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+
+    gap: 12px;
+}
+
+
+.size-option {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 56px;
+
+    padding: 12px;
+
+    color: var(--muted);
+    background: rgba(0, 0, 0, 0.22);
+
+    border: 1px solid var(--line);
+    border-radius: var(--radius-small);
+
+    font-size: 0.88rem;
+    font-weight: 650;
+
+    cursor: pointer;
+
+    transition:
+        color var(--transition-fast),
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        transform var(--transition-fast);
+}
+
+
+/*
+ * Visually hide the browser radio button while keeping it available
+ * to assistive technologies and keyboard navigation.
+ */
+.size-option input {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    opacity: 0;
+}
+
+
+.size-option:hover {
+    color: var(--text);
+
+    border-color: rgba(200, 173, 117, 0.45);
+
+    transform: translateY(-1px);
+}
+
+
+.size-option:has(input:checked) {
+    color: var(--text);
+    background: var(--accent-soft);
+
+    border-color: rgba(200, 173, 117, 0.7);
+}
+
+
+.size-option:has(input:focus-visible) {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+
+/* ---------- Payment Panel ---------- */
+
+.payment-section p {
+    max-width: 680px;
+
+    margin-bottom: 20px;
+
+    color: var(--muted);
+
+    line-height: 1.7;
+}
+
+
+.payment-status {
+    display: flex;
+    align-items: center;
+
+    min-height: 64px;
+
+    padding: 16px 18px;
+
+    color: #d8c69d;
+    background: rgba(200, 173, 117, 0.06);
+
+    border: 1px solid rgba(200, 173, 117, 0.2);
+    border-radius: var(--radius-small);
+
+    font-size: 0.9rem;
+    font-weight: 650;
+}
+
+
+.payment-status::before {
+    content: "Secure";
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-right: 14px;
+    padding: 5px 8px;
+
+    color: var(--bg);
+    background: var(--accent);
+
+    border-radius: 999px;
+
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+
+/* ---------- Submit Area ---------- */
+
+.form-submit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 32px;
+
+    padding-top: 40px;
+
+    border-top: 1px solid var(--line);
+}
+
+
+.form-submit .checkbox-field {
+    max-width: 580px;
+}
+
+
+.form-submit .button {
+    flex-shrink: 0;
+
+    min-height: 52px;
+
+    padding-inline: 24px;
+}
+
+
+/* ==========================================================================
+   16. RESPONSIVE STYLES
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   Tablet / Smaller Desktop
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 900px) {
+
+    .hero-grid,
+    .split {
+        grid-template-columns: 1fr;
+    }
+
+
+    .hero-grid {
+        gap: 45px;
+    }
+
+
+    .split {
+        gap: 38px;
+    }
+
+
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    .process-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    .cta {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+
+    /*
+     * Hide the large navbar CTA when horizontal space becomes limited.
+     */
+    .nav-cta {
+        display: none;
+    }
+
+
+    /* Signup */
+
+    .signup-form {
+        padding: 36px;
+    }
+
+
+    .size-options {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+}
+
+
+/* --------------------------------------------------------------------------
+   Mobile
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 640px) {
+
+    .container {
+        width: min(
+            var(--max-width),
+            calc(100% - 32px)
+        );
+    }
+
+
+    .narrow {
+        margin-inline: auto;
+    }
+
+
+    /* Navigation */
+
+    .nav {
+        gap: 12px;
+    }
+
+
+    .nav-links {
+        gap: 15px;
+    }
+
+
+    .brand span:last-child {
+        display: none;
+    }
+
+
+    /* Typography */
+
+    h1 {
+        font-size: 3.2rem;
+    }
+
+
+    /* Hero */
+
+    .hero,
+    .page-hero {
+        padding: 78px 0 65px;
+    }
+
+
+    .visual-card {
+        min-height: 390px;
+    }
+
+
+    .trust-row {
+        display: grid;
+
+        gap: 8px;
+    }
+
+
+    .trust-row span + span::before {
+        display: none;
+    }
+
+
+    /* Sections */
+
+    .section {
+        padding: 72px 0;
+    }
+
+
+    /* Cards */
+
+    .card-grid,
+    .three-grid,
+    .process-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .card {
+        min-height: 0;
+    }
+
+
+    .card-number {
+        margin-bottom: 28px;
+    }
+
+
+    /* CTA */
+
+    .cta {
+        padding: 30px;
+    }
+
+
+    /* Footer */
+
+    .footer-inner,
+    .footer-links {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+
+    /* Signup */
+
+    .signup-hero {
+        padding-bottom: 56px;
+    }
+
+
+    .signup-form {
+        padding: 26px;
+
+        border-radius: 18px;
+    }
+
+
+    .form-section {
+        padding-bottom: 32px;
+    }
+
+
+    .form-section + .form-section {
+        padding-top: 32px;
+    }
+
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .size-options {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+
+    .form-submit {
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: 24px;
+
+        padding-top: 32px;
+    }
+
+
+    .form-submit .button {
+        width: 100%;
+    }
+
+}
+
+
+/* --------------------------------------------------------------------------
+   Small Mobile
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 420px) {
+
+    .signup-form {
+        padding: 20px;
+    }
+
+
+    .size-options {
+        grid-template-columns: 1fr;
+    }
+
+
+    .nav-links {
+        font-size: 0.82rem;
+        gap: 11px;
+    }
+
+}
